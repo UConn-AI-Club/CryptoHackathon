@@ -3,3 +3,5 @@ s3_dump/
 *.csv
 *__pycache__*
 config.yaml
+testing/
+*test*
