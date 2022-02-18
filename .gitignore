@@ -1,2 +1,7 @@
 s3_dump/
 *env*
+*.csv
+*__pycache__*
+config.yaml
+testing/
+*test*
