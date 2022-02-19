@@ -35,3 +35,4 @@ requests
 pandas
 plotly
 pyyaml
+dacite
