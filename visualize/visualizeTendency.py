@@ -19,8 +19,8 @@ def __displayGraph(data: pd.DataFrame):
     pprint(data)
 
     fig = px.line(data, x="x", y="y", title="Tendency of Crypto over time")
-    #fig.write_html("./dataDump/graph.html")
-    fig.show()
+    fig.write_html("./dataDump/graph.html")
+    #fig.show()
 
 def __preprocessData(data: List[List[Any]]):
     """
