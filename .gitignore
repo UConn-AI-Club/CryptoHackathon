@@ -5,3 +5,4 @@ s3_dump/
 config.yaml
 testing/
 *test*
+data_dump/
