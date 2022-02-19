@@ -1,7 +1,7 @@
 from decimal import Decimal
 from typing import Any
 from maxPool.maxPool import maxPool
-from .models import Trade
+from process.models import Trade
 
 from datetime import datetime
 

@@ -4,7 +4,6 @@ from datetime import datetime
 
 # include local modules
 from manager.load_config import CONFIG # load configuration file from local yaml
-from process.algorithm import algorithm
 
 def loadData(csv_type: str, delimiter: int=None, offset: int=0):
     """
