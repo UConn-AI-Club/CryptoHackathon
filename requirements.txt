@@ -34,3 +34,4 @@ wcwidth==0.2.5
 requests
 pandas
 plotly
+pyyaml
