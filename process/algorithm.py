@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+from decimal import Decimal
+from typing import Any
 from maxPool.maxPool import maxPool
 
 @dataclass
@@ -26,7 +29,7 @@ def algorithm(csv_row: str, context: dict[str, Any],):
     """
 
     try:
-        row = row.split(",")
+        row = csv_row.split(",")
         exchange = row[0]
         price = float(row[1])
         amount = float(row[2])
@@ -34,13 +37,13 @@ def algorithm(csv_row: str, context: dict[str, Any],):
         if timestamp < datetime(2009, 2, 3):
             raise Exception("Timestamp error before creation of crypto")
     except Exception as e:
-        print(f"Error parsing row, skipping... ROW: '{row}'")
+        print(f"Error parsing row, skipping... ROW: '{csv_row}'")
         yield None
 
-    print(f"Succesfully parsed ROW: '{row}'")
+    print(f"Succesfully parsed ROW: '{csv_row}'")
 
     yield Trade(
         trade_type="",
         base="",
-        volume=""
+        volume=2
     )

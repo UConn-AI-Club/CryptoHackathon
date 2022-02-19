@@ -37,6 +37,12 @@ def readArguments():
         action="store_true",
         help="run realtime test on data"
     )
+    parser.add_argument(
+        "--load_data",
+        required=False,
+        action="store_true",
+        help="load data to run"
+    )
 
     args = parser.parse_args()
 
