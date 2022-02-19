@@ -31,6 +31,12 @@ def readArguments():
         type=int,
         help="set the offset on the number of rows to skip at beginning of data"
     )
+    parser.add_argument(
+        "--realtime_run",
+        required=False,
+        action="store_true",
+        help="run realtime test on data"
+    )
 
     args = parser.parse_args()
 

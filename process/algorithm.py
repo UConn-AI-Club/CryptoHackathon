@@ -1,5 +1,11 @@
 from maxPool.maxPool import maxPool
 
+@dataclass
+class Trade:
+    trade_type: str # BUY | SELL
+    base: str
+    volume: Decimal
+
 def algorithm(csv_row: str, context: dict[str, Any],):
     """ Trading Algorithm
 
@@ -19,4 +25,22 @@ def algorithm(csv_row: str, context: dict[str, Any],):
     Yield (None | Trade | [Trade]): a trade order/s; None indicates no trade action
     """
 
-    return maxPool(csv_row, context)
+    try:
+        row = row.split(",")
+        exchange = row[0]
+        price = float(row[1])
+        amount = float(row[2])
+        timestamp = datetime.fromtimestamp(float(row[3]))
+        if timestamp < datetime(2009, 2, 3):
+            raise Exception("Timestamp error before creation of crypto")
+    except Exception as e:
+        print(f"Error parsing row, skipping... ROW: '{row}'")
+        yield None
+
+    print(f"Succesfully parsed ROW: '{row}'")
+
+    yield Trade(
+        trade_type="",
+        base="",
+        volume=""
+    )
