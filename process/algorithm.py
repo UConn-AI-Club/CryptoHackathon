@@ -25,17 +25,17 @@ def algorithm(csv_row: str, context: dict[str, Any],):
     """
 
     row = []
+    print()
     try:
         row = csv_row.split(",")
         exchange = row[0]
         price = float(row[1])
         amount = float(row[2])
         timestamp = datetime.fromtimestamp(float(row[3]))
-        print(timestamp)
+
         if timestamp < datetime(2009, 2, 3):
             raise Exception("Timestamp error before creation of crypto")
     except Exception as e:
-        print(e)
         print(f"Error parsing row, skipping... ROW: '{csv_row}'")
         yield None
         return

@@ -31,8 +31,12 @@ def maxPool(row: List[Any], context: dict[str, Any]):
     if "usd" not in context:
         context["usd"] = 1000000.00
 
-    print(context["usd"])
-    print(row[3])
+
+    print("USD HOLDING:", context["usd"])
+    if "cur_crypto" in context["xbt"]:
+        print("XBT HOLDING:", context["xbt"]["cur_crypto"])
+    if "cur_crypto" in context["eth"]:
+        print("ETH MHOLDING:", context["eth"]["cur_crypto"])
 
     yield from __cryptoMaxPool(row, context, "xbt" if "xbt" in row[0] else "eth")
     return
@@ -55,7 +59,7 @@ def __cryptoMaxPool(row: List[Any], context: dict[str, Any], crypto_type: str):
     c_context = from_dict(data_class=contextClass, data=c_context)
 
     if c_context.prev_row[3] == row[3]:
-        print("ssss")
+        print("CALCULATING LOAD AVG")
         c_context.load_sum += row[1]
         c_context.load_cnt += 1
         context[crypto_type] = c_context.__dict__.copy()
@@ -75,7 +79,7 @@ def __cryptoMaxPool(row: List[Any], context: dict[str, Any], crypto_type: str):
 
     if c_context.prev_load_avg < row[1]:
         invest_amount = row[1]/((context["usd"]/c_context.trend_cnt)*0.6)
-        print("WHATATAT")
+        print("BUYING")
 
         yield Trade(
             trade_type="BUY",
@@ -87,7 +91,7 @@ def __cryptoMaxPool(row: List[Any], context: dict[str, Any], crypto_type: str):
         c_context.cur_crypto += invest_amount
         context["usd"] -= ((context["usd"]/c_context.trend_cnt)*0.6)
     else:
-        print("sssss")
+        print("SELLING IF HAVE")
         yield Trade(
             trade_type="SELL",
             base=crypto_type,
