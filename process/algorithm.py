@@ -1,13 +1,7 @@
-from dataclasses import dataclass
 from decimal import Decimal
 from typing import Any
 from maxPool.maxPool import maxPool
-
-@dataclass
-class Trade:
-    trade_type: str # BUY | SELL
-    base: str
-    volume: Decimal
+from .models import Trade
 
 def algorithm(csv_row: str, context: dict[str, Any],):
     """ Trading Algorithm
@@ -28,6 +22,7 @@ def algorithm(csv_row: str, context: dict[str, Any],):
     Yield (None | Trade | [Trade]): a trade order/s; None indicates no trade action
     """
 
+    row = []
     try:
         row = csv_row.split(",")
         exchange = row[0]
@@ -42,8 +37,4 @@ def algorithm(csv_row: str, context: dict[str, Any],):
 
     print(f"Succesfully parsed ROW: '{csv_row}'")
 
-    yield Trade(
-        trade_type="",
-        base="",
-        volume=2
-    )
+    yield from maxPool(row, context)

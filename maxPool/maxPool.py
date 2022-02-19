@@ -9,25 +9,13 @@ from pprint import pprint
 class contextClass:
     previous: List
 
-
-def maxPool(row: str, context: dict[str, Any]):
+def maxPool(row: List[List[str]], context: dict[str, Any]):
     """
     max pool approach to trading bot
 
-    :param row: the row from the csv file to be processed
+    :param row: the rpcoessed row to be ran
     :param context: persistent context from previous iterations
     """
-
-    # try parsing current row
-    try:
-        row = row.split(",")
-        exc = row[0]
-        price = float(row[1])
-        amount = float(row[2])
-        time = datetime.fromtimestamp(int(row[3]))
-    except:
-        print(f"shit happened row: {row}")
-        return context
 
     response = None
 
