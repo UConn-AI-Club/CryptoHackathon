@@ -3,6 +3,8 @@ from typing import Any
 from maxPool.maxPool import maxPool
 from .models import Trade
 
+from datetime import datetime
+
 def algorithm(csv_row: str, context: dict[str, Any],):
     """ Trading Algorithm
 
@@ -29,12 +31,16 @@ def algorithm(csv_row: str, context: dict[str, Any],):
         price = float(row[1])
         amount = float(row[2])
         timestamp = datetime.fromtimestamp(float(row[3]))
+        print(timestamp)
         if timestamp < datetime(2009, 2, 3):
             raise Exception("Timestamp error before creation of crypto")
     except Exception as e:
+        print(e)
         print(f"Error parsing row, skipping... ROW: '{csv_row}'")
         yield None
+        return
 
     print(f"Succesfully parsed ROW: '{csv_row}'")
 
-    yield from maxPool(row, context)
+    yield from maxPool([exchange, price, amount, timestamp], context)
+    return
